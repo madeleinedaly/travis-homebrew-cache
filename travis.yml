@@ -1,0 +1,31 @@
+os: osx
+
+env:
+  global:
+    secure: gxn1eo4A5oYLUkYo8Tf76+XoxEmEDw/5YeqjrNHyoima4Vsev3yDwqV97N+SS2SuuKBQnNSLZQ6+toQunGC3NQ9PsFD3Un/G1wPIuwguZdc58NRKTticBwiilJ9qMP+0+JE7hoyje+Vqh+30ioPPYOlAMiGcz4jssZE/Bi3CYnQ1A2/7EpEIqBMjGE4x61X+QYHEeg5GrYssAxRUPwimuI7tsfxLdniEQr+KZbZ2EdYQL0AW/Q9rcJRF/25DS944W8OKUwxVnLCJmdWz7uqOUDVot4wBTmOZIg3Clo7I0ioWaZ/m68gEDJqvfSNlyxC0YFi1Fz8EdvyY/+Vciuu1QO9MtjX6/slHmtWhO4gHlPunrKg7qv/qFgkxBNURrVBEKZDWBgOmKc7fGPbiipwf32kyFiFoCL+rlZerqa5mjEaoDp3NIBvuPq7D8D2saZwqo/ptA7SeMBITKR1eumKn0Ht5plCTAk7/7NJ3PoBoky3wbG6T47//VdhUZ3TSgH8sIXAU/3YMumjxbOsxfqqtJN4EoRzwfZExm6dDrIXe8KZ5CQXvPoyYsQpShqM1jEWkJm+b8WdGwY75GHN8wsBYPyAyq+pkrErdoNp5kt82ePMQagVc7D68/7CegLWOt9rOj96+f3Ddqaw+tADomtmcnvYIOVhmjlJseiNP9cZN4x4=
+
+before_script:
+  - echo 'installing node'
+  - brew install node
+  - echo 'checking for cache to restore'
+  - cd $TRAVIS_BUILD_DIR && ./restore.sh
+
+script:
+  - echo 'running script'
+
+before_deploy:
+  - echo 'persisting cache'
+  - cd $TRAVIS_BUILD_DIR && persist.sh
+
+deploy:
+  - provider: s3
+  - access_key_id: AKIAINWJKKKCO6BYUP3A
+  - secret_access_key:
+    - secure: gxn1eo4A5oYLUkYo8Tf76+XoxEmEDw/5YeqjrNHyoima4Vsev3yDwqV97N+SS2SuuKBQnNSLZQ6+toQunGC3NQ9PsFD3Un/G1wPIuwguZdc58NRKTticBwiilJ9qMP+0+JE7hoyje+Vqh+30ioPPYOlAMiGcz4jssZE/Bi3CYnQ1A2/7EpEIqBMjGE4x61X+QYHEeg5GrYssAxRUPwimuI7tsfxLdniEQr+KZbZ2EdYQL0AW/Q9rcJRF/25DS944W8OKUwxVnLCJmdWz7uqOUDVot4wBTmOZIg3Clo7I0ioWaZ/m68gEDJqvfSNlyxC0YFi1Fz8EdvyY/+Vciuu1QO9MtjX6/slHmtWhO4gHlPunrKg7qv/qFgkxBNURrVBEKZDWBgOmKc7fGPbiipwf32kyFiFoCL+rlZerqa5mjEaoDp3NIBvuPq7D8D2saZwqo/ptA7SeMBITKR1eumKn0Ht5plCTAk7/7NJ3PoBoky3wbG6T47//VdhUZ3TSgH8sIXAU/3YMumjxbOsxfqqtJN4EoRzwfZExm6dDrIXe8KZ5CQXvPoyYsQpShqM1jEWkJm+b8WdGwY75GHN8wsBYPyAyq+pkrErdoNp5kt82ePMQagVc7D68/7CegLWOt9rOj96+f3Ddqaw+tADomtmcnvYIOVhmjlJseiNP9cZN4x4=
+  - region: us-east-1
+  - bucket: baphomet
+  - upload-dir: travis-cache
+  - local-dir: travis-cache
+
+  # preserve cache
+  - skip_cleanup: true
