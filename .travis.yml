@@ -1,9 +1,8 @@
 os: osx
 
 env:
-  global:
-    HOMEBREW_NO_AUTO_UPDATE=1
-    HOMEBREW_EMACS_INSTALLED="$(brew ls | grep -c emacs)"
+  - HOMEBREW_NO_AUTO_UPDATE=1
+  - HOMEBREW_EMACS_INSTALLED="$(brew ls | grep -c emacs)"
 
 # before_install:
 #   - curl -O https://s3.amazonaws.com/baphomet/travis-cache/homebrew-cache.tar.gz
@@ -11,7 +10,7 @@ env:
 #   - brew link emacs gnutls
 
 install:
-  - if ! [[ $EMACS_INSTALLED -eq 1 ]]; then brew install emacs --HEAD --with-cocoa --with-gnutls; fi
+  - if ! [[ $EMACS_INSTALLED -eq 1 ]]; then brew install emacs --with-cocoa --with-gnutls; fi
 
 script:
   - echo 'hello :)'
