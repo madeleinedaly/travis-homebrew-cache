@@ -4,10 +4,10 @@ env:
   global:
     HOMEBREW_NO_AUTO_UPDATE=1
 
-before_install:
-  - curl -O https://s3.amazonaws.com/baphomet/homebrew-cache.tar.gz
-  - tar xzf homebrew-cache.tar.gz -C /usr/local/Cellar
-  - brew link nmap openssl
+# before_install:
+#   - curl -O https://s3.amazonaws.com/baphomet/homebrew-cache.tar.gz
+#   - tar xzf homebrew-cache.tar.gz -C /usr/local/Cellar
+#   - brew link nmap openssl
 
 install:
   - if ! [ -x "$(command -v nmap)" ]; then brew install nmap; fi
