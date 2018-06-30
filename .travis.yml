@@ -5,9 +5,9 @@ env:
     HOMEBREW_NO_AUTO_UPDATE=1
 
 script:
-  brew install nmap
-  tar -czf homebrew-cache.tar.gz /usr/local/Cellar{nmap,openssl}
-  mkdir -p local-cache && mv homebrew-cache.tar.gz local-cache
+  - brew install nmapb
+  - tar -czf homebrew-cache.tar.gz /usr/local/Cellar{nmap,openssl}
+  - mkdir -p local-cache && mv homebrew-cache.tar.gz local-cache
 
 deploy:
   provider: s3
