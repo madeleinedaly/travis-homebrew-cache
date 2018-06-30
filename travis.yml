@@ -1,7 +1,7 @@
-os: osx
-
 language: node_js
 
-node_js: 10
+node_js:
+  - "10.5"
 
-script: npm upgrade -g npm
+install:
+  - "npm upgrade -g npm"
