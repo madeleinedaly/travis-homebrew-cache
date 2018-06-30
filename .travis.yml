@@ -11,7 +11,7 @@ env:
 
 install:
   - EMACS_INSTALLED=$(brew ls | grep -c emacs)
-  - [[ $EMACS_INSTALLED -eq 0 ]] && brew install emacs --HEAD --with-cocoa --with-gnutls
+  - if [[ $EMACS_INSTALLED -eq 0 ]]; then brew install emacs --HEAD --with-cocoa --with-gnutls; fi
 
 script:
   - echo 'hello :)'
