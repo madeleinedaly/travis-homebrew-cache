@@ -10,7 +10,8 @@ env:
 #   - brew link emacs gnutls
 
 install:
-  - if ! [ -x "$(command -v emacs)" ]; then brew install emacs --HEAD --with-cocoa --with-gnutls; fi
+  - EMACS_INSTALLED=$(brew ls | grep -c emacs)
+  - [[ $EMACS_INSTALLED -eq 0 ]] && brew install emacs --HEAD --with-cocoa --with-gnutls
 
 script:
   - echo 'hello :)'
