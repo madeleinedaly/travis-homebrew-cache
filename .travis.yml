@@ -4,10 +4,17 @@ env:
   global:
     HOMEBREW_NO_AUTO_UPDATE=1
 
-script:
-  - brew install nmap
-  - tar -czf homebrew-cache.tar.gz /usr/local/Cellar/nmap /usr/local/Cellar/openssl
-  - mkdir -p local-cache && mv homebrew-cache.tar.gz local-cache
+before_install:
+  - curl -O https://s3.amazonaws.com/baphomet/homebrew-cache.tar.gz
+  - tar xzf homebrew-cache.tar.gz
+  - brew link nmap openssl
+
+install:
+  - if ! [ -x "$(command -v nmap)" ]; then brew install nmap; fi
+
+before_deploy:
+  - tar czf homebrew-cache.tar.gz /usr/local/Cellar/nmap /usr/local/Cellar/openssl
+  - mkdir -p s3-cache && mv homebrew-cache.tar.gz s3-cache
 
 deploy:
   provider: s3
@@ -16,4 +23,4 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   skip_cleanup: true
-  local_dir: local-cache
+  local_dir: s3-cache
