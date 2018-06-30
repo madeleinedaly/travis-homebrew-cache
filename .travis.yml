@@ -7,8 +7,13 @@ env:
 script:
   - brew install awscli
   - tar czf homebrew-cache.tar.gz --directory /usr/local/Cellar awscli gdbm readline sqlite python
+  - mkdir -p local-cache && mv homebrew-cache.tar.gz local-cache
 
 deploy:
-  - provider: script
-  - script: aws s3 sync homebrew-cache.tar.gz s3://baphomet --delete
+  - provider: s3
+  - bucket: baphomet
+  - region: $AWS_DEFAULT_REGION
+  - access_key_id: $AWS_ACCESS_KEY_ID
+  - secret_access_key: $AWS_SECRET_ACCESS_KEY
   - skip_cleanup: true
+  - local_dir: local-cache
