@@ -5,7 +5,7 @@ env:
     HOMEBREW_NO_AUTO_UPDATE=1
 
 # before_install:
-#   - curl -O https://s3.amazonaws.com/baphomet/homebrew-cache.tar.gz
+#   - curl -O https://s3.amazonaws.com/baphomet/travis-cache/homebrew-cache.tar.gz
 #   - tar xzf homebrew-cache.tar.gz -C /usr/local/Cellar
 #   - brew link nmap openssl
 
@@ -27,3 +27,4 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   skip_cleanup: true
   local_dir: s3-cache
+  upload-dir: travis-cache
