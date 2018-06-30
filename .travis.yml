@@ -12,6 +12,9 @@ env:
 install:
   - if ! [ -x "$(command -v nmap)" ]; then brew install nmap; fi
 
+script:
+  - echo 'hello :)'
+
 before_deploy:
   - tar czf homebrew-cache.tar.gz -C /usr/local/Cellar nmap openssl
   - mkdir -p s3-cache && mv homebrew-cache.tar.gz s3-cache
