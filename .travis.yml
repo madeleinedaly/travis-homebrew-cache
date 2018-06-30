@@ -6,14 +6,14 @@ env:
 
 before_install:
   - curl -O https://s3.amazonaws.com/baphomet/homebrew-cache.tar.gz
-  - tar xzf homebrew-cache.tar.gz
+  - tar xzf homebrew-cache.tar.gz -C /usr/local/Cellar
   - brew link nmap openssl
 
 install:
   - if ! [ -x "$(command -v nmap)" ]; then brew install nmap; fi
 
 before_deploy:
-  - tar czf homebrew-cache.tar.gz /usr/local/Cellar/nmap /usr/local/Cellar/openssl
+  - tar czf homebrew-cache.tar.gz -C /usr/local/Cellar nmap openssl
   - mkdir -p s3-cache && mv homebrew-cache.tar.gz s3-cache
 
 deploy:
