@@ -5,20 +5,17 @@ env:
     - HOMEBREW_NO_AUTO_UPDATE=1
     - HOMEBREW_EMACS_INSTALLED="$(brew ls | grep -c emacs)"
 
-# before_install:
-#   - curl -O https://s3.amazonaws.com/baphomet/travis-cache/homebrew-cache.tar.gz
-#   - tar xzf homebrew-cache.tar.gz -C /usr/local/Cellar
-#   - brew link emacs gnutls
+before_install:
+  - ./before_install.sh
 
 install:
-  - if ! [[ $EMACS_INSTALLED -eq 1 ]]; then brew install emacs --with-cocoa --with-gnutls; fi
+  - ./install.sh
 
 script:
   - echo 'hello :)'
 
 before_deploy:
-  - tar czf homebrew-cache.tar.gz -C /usr/local/Cellar emacs gnutls
-  - mkdir -p s3-cache && mv homebrew-cache.tar.gz s3-cache
+  - ./before_deploy.sh
 
 deploy:
   provider: s3
