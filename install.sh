@@ -14,5 +14,5 @@ if [[ $LAST_COMMIT_BUILT != $CURRENT_UPSTREAM_HEAD ]] || ! [[ $HOMEBREW_EMACS_IN
   echo 'Rebuilding Emacs...'
   brew uninstall emacs
   brew update
-  brew install emacs --HEAD --with-cocoa --with-gnutls
+  brew install emacs --HEAD --with-cocoa
 fi
