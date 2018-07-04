@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-LAST_COMMIT_BUILT=$(cat /usr/local/Cellar/emacs/(HEAD-*)/INSTALL_RECEIPT.json | python -c "import sys, json; print(json.load(sys.stdin)['HEAD'])")
+INSTALL_DIR=$(find /usr/local/Cellar/emacs -type d -name 'HEAD-*')
+
+LAST_COMMIT_BUILT=$(cat "$INSTALL_DIR/INSTALL_RECEIPT.json" | python -c "import sys, json; print(json.load(sys.stdin)['HEAD'])")
 CURRENT_UPSTREAM_HEAD=$(git ls-remote git://git.sv.gnu.org/emacs.git HEAD | awk '{print $1}')
 
 HOMEBREW_EMACS_INSTALLED="$(brew ls | grep -c emacs)"
