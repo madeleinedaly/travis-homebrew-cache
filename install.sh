@@ -9,7 +9,7 @@ CURRENT_UPSTREAM_HEAD=${"$(git ls-remote https://github.com/emacs-mirror/emacs.g
 echo 'Last commit built:' $LAST_COMMIT_BUILT
 echo 'Current upstream HEAD:' $CURRENT_UPSTREAM_HEAD
 
-if [[ $CURRENT_UPSTREAM_HEAD != $LAST_COMMIT_BUILT* ]] || ! [[ $HOMEBREW_EMACS_INSTALLED -eq 1 ]]; then
+if [[ $CURRENT_UPSTREAM_HEAD != $LAST_COMMIT_BUILT ]] || ! [[ $HOMEBREW_EMACS_INSTALLED -eq 1 ]]; then
   echo 'Rebuilding Emacs...'
   brew uninstall emacs
   brew update
