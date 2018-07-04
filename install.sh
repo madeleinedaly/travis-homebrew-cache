@@ -12,10 +12,7 @@ echo 'Current upstream HEAD:' $CURRENT_UPSTREAM_HEAD
 
 if [[ $LAST_COMMIT_BUILT != $CURRENT_UPSTREAM_HEAD ]] || ! [[ $HOMEBREW_EMACS_INSTALLED -eq 1 ]]; then
   echo 'Rebuilding Emacs...'
+  brew uninstall emacs
   brew update
-  brew unlink emacs
-  brew install gnu-sed
-  brew install texinfo
-  brew install gnutls
   brew install emacs --HEAD --with-cocoa --with-gnutls
 fi
