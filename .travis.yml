@@ -3,7 +3,6 @@ os: osx
 env:
   global:
     - HOMEBREW_NO_AUTO_UPDATE=1
-    - HOMEBREW_EMACS_INSTALLED="$(brew ls | grep -c emacs)"
 
 before_install:
   - ./before_install.sh
