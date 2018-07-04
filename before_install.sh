@@ -14,5 +14,5 @@ if [ -f homebrew-cache.tar.gz ]; then
   tar xzf homebrew-cache.tar.gz -C /usr/local/Cellar
 
   echo 'Linking dependencies...'
-  brew link emacs gnutls #gnu-sed texinfo
+  brew link emacs gnutls gnu-sed texinfo
 fi
