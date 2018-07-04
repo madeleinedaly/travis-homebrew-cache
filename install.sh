@@ -8,7 +8,7 @@ CURRENT_HEAD_LONG=$(git ls-remote https://github.com/emacs-mirror/emacs.git HEAD
 CURRENT_HEAD_SHORT=${CURRENT_HEAD_LONG:0:7}
 
 echo 'Last commit built:' $LAST_COMMIT_BUILT
-echo 'Current upstream HEAD:' $CURRENT_UPSTREAM_HEAD
+echo 'Current upstream HEAD:' $CURRENT_HEAD_SHORT
 
 if [[ $CURRENT_HEAD_SHORT != $LAST_COMMIT_BUILT ]] || ! [[ $HOMEBREW_EMACS_INSTALLED -eq 1 ]]; then
   echo 'Rebuilding Emacs...'
