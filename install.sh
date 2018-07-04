@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+echo '/usr/local/Cellar ::'
+ls -lhA /usr/local/Cellar
+
+echo '/usr/local/Cellar/emacs ::'
+ls -lhA /usr/local/Cellar/emacs
+
 INSTALL_DIR=$(find /usr/local/Cellar/emacs -type d -name 'HEAD-*')
 
 LAST_COMMIT_BUILT=$(cat "$INSTALL_DIR/INSTALL_RECEIPT.json" | python -c "import sys, json; print(json.load(sys.stdin)['HEAD'])")
